@@ -19,11 +19,11 @@ def root():
 def lender_reviews():
     url = request.args.get('url')
     if url is None:
-        return make_response(jsonify({'message': 'url query parameter not provided'}), 400)
+        return make_response(jsonify({'error': 'url query parameter not provided'}), 400)
 
     reviews = get_lending_tree_reviews(url)
     if reviews is None:
-        return make_response(jsonify({'message': f'reviews not found for the url: {url}'}), 404)
+        return make_response(jsonify({'error': f'unable to get reviews for {url}'}), 404)
     return jsonify(get_lending_tree_reviews(url))
 
 
